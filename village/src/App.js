@@ -59,6 +59,12 @@ class App extends Component {
     this.props.history.push("/SmurfFactory");
   }
 
+  clearUpdating = () => {
+    this.setState({
+      smurfupdating: ''
+    })
+  }
+
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
   // Notice what your map function is looping over and returning inside of Smurfs.
   // You'll need to make sure you have the right properties on state and pass them down to props.
@@ -74,7 +80,7 @@ class App extends Component {
           path="/"
           render={props => (
             <div>
-              <Smurfs {...props} deleteSmurf={this.deleteSmurf} modifySmurf={this.modifySmurf} smurfs={this.state.smurfs} />
+              <Smurfs {...props} clearUpdating={this.clearUpdating} deleteSmurf={this.deleteSmurf} modifySmurf={this.modifySmurf} smurfs={this.state.smurfs} />
               <Link to="/SmurfFactory">Add New Smurf...</Link>
             </div>
           )}

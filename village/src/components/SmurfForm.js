@@ -23,7 +23,11 @@ class SmurfForm extends Component {
       height: this.props.smurfs.find(smurf => smurf.id.toString() === this.props.smurfupdating).height
     })
     :
-    null
+    this.setState({
+      name: '',
+      age: '',
+      height: ''
+    })
   }
 
   addSmurf = e => {
