@@ -39,6 +39,21 @@ class App extends Component {
     }, 500);
   };
 
+  deleteSmurf = id => {
+    axios
+    .delete(`${apiurl}/${id}/`)
+    .then(res => {
+      this.setState({
+        smurfs: res.data
+      });
+    })
+    .catch(err => console.log(err));
+  }
+
+  modifySmurf = id => {
+    
+  }
+
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
   // Notice what your map function is looping over and returning inside of Smurfs.
   // You'll need to make sure you have the right properties on state and pass them down to props.
@@ -54,7 +69,7 @@ class App extends Component {
           path="/"
           render={props => (
             <div>
-              <Smurfs {...props} smurfs={this.state.smurfs} />
+              <Smurfs {...props} deleteSmurf={this.deleteSmurf} modifySmurf={this.modifySmurf} smurfs={this.state.smurfs} />
               <Link to="/AddNew">Add New Smurf...</Link>
             </div>
           )}

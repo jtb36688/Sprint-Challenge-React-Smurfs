@@ -11,11 +11,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   height: 100%;
 }
 
 .SmurfForm input {
   text-align: center;
+  width: 50%;
+  height: 15%
 }
 
 .SmurfFormDiv {
@@ -29,4 +32,15 @@
 
 .Smurf {
   width: 30%;
+}
+
+.MappedButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.MappedButtons button {
+  width: 30%;
+  margin-bottom: 3px;
 }

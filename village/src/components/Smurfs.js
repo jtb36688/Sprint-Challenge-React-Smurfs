@@ -3,6 +3,14 @@ import React, { Component } from 'react';
 import Smurf from './Smurf';
 
 class Smurfs extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentlyupdating: []
+    }
+  }
+
+
   render() {
     return (
       <div className="Smurfs">
@@ -11,6 +19,8 @@ class Smurfs extends Component {
           {this.props.smurfs.map(smurf => {
             return (
               <Smurf
+                modifySmurf={this.props.modifySmurf}
+                deleteSmurf={this.props.deleteSmurf}
                 name={smurf.name}
                 id={smurf.id}
                 age={smurf.age}
