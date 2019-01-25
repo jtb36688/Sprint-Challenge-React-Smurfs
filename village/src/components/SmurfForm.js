@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import "../App.css";
 
 const apiurl = `http://localhost:3333/smurfs`
 
@@ -36,8 +37,8 @@ class SmurfForm extends Component {
 
   render() {
     return (
-      <div className="SmurfForm">
-        <form onSubmit={this.addSmurf}>
+      <div className="SmurfFormDiv">
+        <form className="SmurfForm" onSubmit={this.addSmurf}>
           <input
             onChange={this.handleInputChange}
             placeholder="name"

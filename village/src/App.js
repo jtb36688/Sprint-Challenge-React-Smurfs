@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
-import SmurfForm from './components/SmurfForm';
-import Smurfs from './components/Smurfs';
+import React, { Component } from "react";
+import axios from "axios";
+import "./App.css";
+import SmurfForm from "./components/SmurfForm";
+import Smurfs from "./components/Smurfs";
+import { Route, NavLink, Link } from "react-router-dom";
 
-const apiurl = `http://localhost:3333/smurfs`
+const apiurl = `http://localhost:3333/smurfs`;
 
 class App extends Component {
   constructor(props) {
@@ -28,17 +29,15 @@ class App extends Component {
   updateAppState = () => {
     setTimeout(() => {
       axios
-      .get(`${apiurl}`)
-      .then(res => {
-        this.setState({ smurfs: res.data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    }, 500)
-    
-  }
-  
+        .get(`${apiurl}`)
+        .then(res => {
+          this.setState({ smurfs: res.data });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }, 500);
+  };
 
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
   // Notice what your map function is looping over and returning inside of Smurfs.
@@ -46,8 +45,29 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SmurfForm updateAppState={this.updateAppState}/>
-        <Smurfs smurfs={this.state.smurfs} />
+        <nav className='NavBar'>
+          <NavLink to='/'>Smurf Village</NavLink>
+          <NavLink to='/AddNew'>Add Smurf(s)</NavLink>
+        </nav>
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <div>
+              <Smurfs {...props} smurfs={this.state.smurfs} />
+              <Link to="/AddNew">Add New Smurf...</Link>
+            </div>
+          )}
+        />
+        <Route
+          path="/AddNew"
+          render={props => (
+            <div>
+              <SmurfForm {...props} updateAppState={this.updateAppState} />
+              <Link to="/">Return To Smurf Village</Link>
+            </div>
+          )}
+        />
       </div>
     );
   }

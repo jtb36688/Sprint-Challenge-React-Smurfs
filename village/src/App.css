@@ -1,3 +1,32 @@
 .App {
   text-align: center;
 }
+
+.NavBar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.SmurfForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.SmurfForm input {
+  text-align: center;
+}
+
+.SmurfFormDiv {
+  height: 300px;
+}
+
+.SmurfsList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Smurf {
+  width: 30%;
+}
