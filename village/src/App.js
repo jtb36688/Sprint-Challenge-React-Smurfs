@@ -28,6 +28,7 @@ class App extends Component {
   }
 
   updateAppState = () => {
+    this.props.history.push("/")
     setTimeout(() => {
       axios
         .get(`${apiurl}`)
@@ -53,7 +54,7 @@ class App extends Component {
 
   modifySmurf = id => {
     this.setState({
-       smurfupdating: id
+       smurfupdating: `${id}`
     })
     this.props.history.push("/SmurfFactory");
   }
@@ -82,8 +83,8 @@ class App extends Component {
           path="/SmurfFactory"
           render={props => (
             <div>
-              <SmurfForm {...props} smurfs={this.state.smurfs} smurfupdating={this.state.smurfupdating} modifySmurf={this.modifySmurf} updateAppState={this.updateAppState} />
-              <Link to="/">Return To Smurf Village</Link>
+              <SmurfForm {...props} smurfs={this.state.smurfs} smurfupdating={this.state.smurfupdating} updateAppState={this.updateAppState} />
+              <Link to="/" >Return To Smurf Village</Link>
             </div>
           )}
         />

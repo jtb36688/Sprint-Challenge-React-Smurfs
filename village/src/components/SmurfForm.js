@@ -13,20 +13,21 @@ class SmurfForm extends Component {
       height: ''
     };
   }
+  // Can I put this.state as a parameter in a function invocation?
 
   componentDidMount() {
     this.props.smurfupdating ?
     this.setState({
-      name: this.props.smurfs.find(smurf => smurf.id === this.props.smurfupdating).name,
-      age: this.props.smurfs.find(smurf => smurf.id === this.props.smurfupdating).age,
-      height: this.props.smurfs.find(smurf => smurf.id === this.props.smurfupdating).height
+      name: this.props.smurfs.find(smurf => smurf.id.toString() === this.props.smurfupdating).name,
+      age: this.props.smurfs.find(smurf => smurf.id.toString() === this.props.smurfupdating).age,
+      height: this.props.smurfs.find(smurf => smurf.id.toString() === this.props.smurfupdating).height
     })
     :
     null
   }
 
-  addSmurf = event => {
-    event.preventDefault();
+  addSmurf = e => {
+    e.preventDefault();
     axios
       .post(apiurl, this.state)
       .then(res => {
@@ -42,6 +43,24 @@ class SmurfForm extends Component {
       this.props.updateAppState()
   };
 
+  updateSmurf = e => {
+    e.preventDefault();
+    axios
+    .put(`${apiurl}/${this.props.smurfupdating}`, this.state)
+    .then(res => {
+      this.setState({
+        name: '',
+        age: '',
+        height: ''
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+    this.props.updateAppState()
+  }
+  
+
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -49,7 +68,7 @@ class SmurfForm extends Component {
   render() {
     return (
       <div className="SmurfFormDiv">
-        <form className="SmurfForm" onSubmit={this.addSmurf}>
+        <form className="SmurfForm" onSubmit={this.props.smurfupdating ? this.updateSmurf : this.addSmurf}>
           <input
             onChange={this.handleInputChange}
             placeholder="name"
@@ -68,7 +87,7 @@ class SmurfForm extends Component {
             value={this.state.height}
             name="height"
           />
-          <button type="submit">Add to the village</button>
+          <button type="submit">{this.props.smurfupdating ? `Transform into improved ${this.state.name}` : 'Add to the village'}</button>
         </form>
       </div>
     );

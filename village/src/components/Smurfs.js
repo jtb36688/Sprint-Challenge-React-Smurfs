@@ -1,26 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Smurf from './Smurf';
 
-class Smurfs extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      currentlyupdating: []
-    }
-  }
+const Smurfs = props => {
 
-
-  render() {
     return (
       <div className="Smurfs">
         <h1>Smurf Village</h1>
         <ul className="SmurfsList">
-          {this.props.smurfs.map(smurf => {
+          {props.smurfs.map(smurf => {
             return (
               <Smurf
-                modifySmurf={this.props.modifySmurf}
-                deleteSmurf={this.props.deleteSmurf}
+                modifySmurf={props.modifySmurf}
+                deleteSmurf={props.deleteSmurf}
                 name={smurf.name}
                 id={smurf.id}
                 age={smurf.age}
@@ -33,10 +25,9 @@ class Smurfs extends Component {
       </div>
     );
   }
-}
+
 
 Smurf.defaultProps = {
- smurfs: [],
 };
 
 export default Smurfs;
