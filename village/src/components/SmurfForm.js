@@ -14,6 +14,17 @@ class SmurfForm extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.smurfupdating ?
+    this.setState({
+      name: this.props.smurfs.find(smurf => smurf.id === this.props.smurfupdating).name,
+      age: this.props.smurfs.find(smurf => smurf.id === this.props.smurfupdating).age,
+      height: this.props.smurfs.find(smurf => smurf.id === this.props.smurfupdating).height
+    })
+    :
+    null
+  }
+
   addSmurf = event => {
     event.preventDefault();
     axios

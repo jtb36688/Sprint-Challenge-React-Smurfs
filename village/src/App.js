@@ -11,7 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      smurfs: []
+      smurfs: [],
+      smurfupdating: ''
     };
   }
 
@@ -51,7 +52,10 @@ class App extends Component {
   }
 
   modifySmurf = id => {
-    
+    this.setState({
+       smurfupdating: id
+    })
+    this.props.history.push("/SmurfFactory");
   }
 
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
@@ -62,7 +66,7 @@ class App extends Component {
       <div className="App">
         <nav className='NavBar'>
           <NavLink to='/'>Smurf Village</NavLink>
-          <NavLink to='/AddNew'>Add Smurf(s)</NavLink>
+          <NavLink to='/SmurfFactory'>Add Smurf(s)</NavLink>
         </nav>
         <Route
           exact
@@ -70,15 +74,15 @@ class App extends Component {
           render={props => (
             <div>
               <Smurfs {...props} deleteSmurf={this.deleteSmurf} modifySmurf={this.modifySmurf} smurfs={this.state.smurfs} />
-              <Link to="/AddNew">Add New Smurf...</Link>
+              <Link to="/SmurfFactory">Add New Smurf...</Link>
             </div>
           )}
         />
         <Route
-          path="/AddNew"
+          path="/SmurfFactory"
           render={props => (
             <div>
-              <SmurfForm {...props} updateAppState={this.updateAppState} />
+              <SmurfForm {...props} smurfs={this.state.smurfs} smurfupdating={this.state.smurfupdating} modifySmurf={this.modifySmurf} updateAppState={this.updateAppState} />
               <Link to="/">Return To Smurf Village</Link>
             </div>
           )}
